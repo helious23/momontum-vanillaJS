@@ -1,6 +1,6 @@
 const toDoForm = document.querySelector(".js-toDoForm"),
   toDoInput = toDoForm.querySelector("input"),
-  toDoList = document.querySelector(".js-toDolist");
+  toDoList = document.querySelector(".js-toDolist"); // ul
 
 const TODOS_LS = "toDos";
 
@@ -12,8 +12,8 @@ function deleteTodo(event) {
   toDoList.removeChild(li); // html 상에서 특정 li 없앰
   const cleanToDos = toDos.filter(function (toDo) {
     return toDo.id !== parseInt(li.id); // li.id = string -> chagne to Int
-  }); // 특정 li.id 를 제외한 나머지 to do를 받아오기 위해 만듦
-  toDos = cleanToDos;
+  }); // 지우기 위해 클릭한 li.id 를 제외한 나머지 to do를 받아오기 위해 만듦
+  toDos = cleanToDos; // toDos 로 다시 담아줌
   saveToDos();
 }
 
