@@ -4,7 +4,18 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 
 const TODOS_LS = "toDos";
 
-const toDos = [];
+let toDos = [];
+
+function deleteTodo(event) {
+  const btn = event.target;
+  const li = btn.parentNode;
+  toDoList.removeChild(li); // html 상에서 특정 li 없앰
+  const cleanToDos = toDos.filter(function (toDo) {
+    return toDo.id !== parseInt(li.id); // li.id = string -> chagne to Int
+  }); // 특정 li.id 를 제외한 나머지 to do를 받아오기 위해 만듦
+  toDos = cleanToDos;
+  saveToDos();
+}
 
 function saveToDos() {
   localStorage.setItem(TODOS_LS, JSON.stringify(toDos)); // localStorage 에서는 모든 data를 string 형태로 저장 -> 객체를 string 형태로 변환해야 함
@@ -16,6 +27,7 @@ function paintToDo(text) {
   const span = document.createElement("span");
   const newId = toDos.length + 1;
   delBtn.innerText = "❌";
+  delBtn.addEventListener("click", deleteTodo);
   span.innerText = text;
   li.appendChild(delBtn);
   li.appendChild(span);
